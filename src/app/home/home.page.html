@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>CineAdapt</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="hero">
+    <div class="clock">{{ localTime() }}</div>
+    <ion-note>Hora local segun {{ location()?.sourceLabel ?? '...' }}</ion-note>
+  </div>
+
+  @if (loading()) {
+    <div class="center"><ion-spinner></ion-spinner></div>
+  }
+  @if (!loading() && location(); as l) {
+    <ion-list [inset]="true">
+      <ion-list-header><ion-label>Lectura del GPS</ion-label></ion-list-header>
+      <ion-item>
+        <ion-label>Estado</ion-label>
+        <ion-badge slot="end" [color]="l.fromGps ? 'success' : 'warning'">{{ l.status }}</ion-badge>
+      </ion-item>
+      <ion-item><ion-label class="ion-text-wrap"><p>{{ statusText(l) }}</p></ion-label></ion-item>
+      <ion-item>
+        <ion-label>Latitud</ion-label>
+        <ion-note slot="end">{{ l.latitude !== null ? l.latitude!.toFixed(5) : 'N/D' }}</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label>Longitud</ion-label>
+        <ion-note slot="end">{{ l.longitude !== null ? l.longitude!.toFixed(5) : 'N/D' }}</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label>Zona horaria</ion-label>
+        <ion-note slot="end">{{ l.timeZone }}</ion-note>
+      </ion-item>
+    </ion-list>
+    <p class="privacy">Las coordenadas se procesan solo en tu dispositivo. No se envian ni se guardan en ningun servidor.</p>
+    <div class="actions">
+      <ion-button expand="block" fill="outline" (click)="refresh()">Actualizar ubicacion</ion-button>
+    </div>
+  }
+
+  <div class="actions">
+    @if (install.installed()) {
+      <ion-note>App instalada</ion-note>
+    } @else if (install.canInstall()) {
+      <ion-button expand="block" (click)="install.install()">Instalar app</ion-button>
+    } @else {
+      <ion-note>Para instalar: menu de Chrome &gt; "Instalar app" / "Agregar a pantalla de inicio".</ion-note>
+    }
+  </div>
+</ion-content>
