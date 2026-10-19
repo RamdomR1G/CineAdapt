@@ -6,7 +6,7 @@
 @import '@ionic/angular/css/padding.css';
 
 /* Paleta CineAdapt (Entrega 2 reemplazara estas variables segun la hora local) */
-:root {
+:root, :root[data-theme='evening'] {
   --ion-color-primary: #2563eb;
   --ion-color-primary-rgb: 37, 99, 235;
   --ion-color-primary-contrast: #ffffff;
@@ -20,8 +20,47 @@
   --ion-item-background: #1e293b;
   --ion-card-background: #1e293b;
   --ion-toolbar-background: #0f172a;
+  --ca-surface: #1e293b;
+  --ca-muted: #64748b;
+  --ca-bar: #0f172a;
+  --ca-border: #1e293b;
+  --ca-bar-text: #94a3b8;
+}
+:root[data-theme='day'] {
+  --ion-background-color: #f8fafc;
+  --ion-background-color-rgb: 248, 250, 252;
+  --ion-text-color: #0f172a;
+  --ion-text-color-rgb: 15, 23, 42;
+  --ion-item-background: #ffffff;
+  --ion-card-background: #ffffff;
+  --ion-toolbar-background: #ffffff;
+  --ion-item-border-color: #e2e8f0;
+  --ca-surface: #e2e8f0;
+  --ca-muted: #64748b;
+  --ca-bar: #ffffff;
+  --ca-border: #e2e8f0;
+  --ca-bar-text: #475569;
+}
+:root[data-theme='night'] {
+  --ion-color-primary: #2d4a9e;
+  --ion-color-primary-rgb: 45, 74, 158;
+  --ion-color-primary-shade: #284190;
+  --ion-color-primary-tint: #425cab;
+  --ion-background-color: #05070d;
+  --ion-background-color-rgb: 5, 7, 13;
+  --ion-text-color: #9aa4b2;
+  --ion-text-color-rgb: 154, 164, 178;
+  --ion-item-background: #0b1020;
+  --ion-card-background: #0b1020;
+  --ion-toolbar-background: #05070d;
+  --ion-item-border-color: #111827;
+  --ca-surface: #0b1020;
+  --ca-muted: #475569;
+  --ca-bar: #05070d;
+  --ca-border: #111827;
+  --ca-bar-text: #64748b;
 }
 
 ion-list-header ion-label { color: var(--ion-text-color) !important; font-weight: 600; }
-ion-tab-bar { --background: #0f172a; --border: 1px solid #1e293b; --color: #94a3b8; --color-selected: var(--ion-color-primary); }
-ion-toolbar { --background: #0f172a; }
+ion-tab-bar { --background: var(--ca-bar); --border: 1px solid var(--ca-border); --color: var(--ca-bar-text); --color-selected: var(--ion-color-primary); }
+ion-toolbar { --background: var(--ca-bar); }
