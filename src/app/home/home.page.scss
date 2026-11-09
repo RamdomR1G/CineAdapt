@@ -6,3 +6,8 @@
 .row-title { margin:18px 16px 8px; font-size:1.05rem; }
 .row { display:flex; gap:12px; overflow-x:auto; padding:0 16px 4px; scrollbar-width:none; &::-webkit-scrollbar{display:none} }
 .item { flex:0 0 112px; }
+
+.greeting { padding:16px 16px 0; animation:rise .5s ease both; h1{margin:0;font-size:1.5rem;font-weight:700} p{margin:2px 0 0;opacity:.65;font-size:.9rem} }
+.row .item { animation:rise .5s ease both; }
+@keyframes rise { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
+@media (prefers-reduced-motion: reduce) { .greeting, .row .item { animation:none; } }

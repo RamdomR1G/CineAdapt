@@ -16,5 +16,8 @@ export const routes: Routes = [
     ],
   },
   { path: 'detail/:id', canActivate: [authGuard], loadComponent: () => import('./detail/detail.page').then((m) => m.DetailPage) },
+  { path: 'support', canActivate: [authGuard], loadComponent: () => import('./support/support.page').then((m) => m.SupportPage) },
+  { path: 'support/:id', canActivate: [authGuard], loadComponent: () => import('./support/report-detail.page').then((m) => m.ReportDetailPage) },
+  { path: 'messages', canActivate: [authGuard], loadComponent: () => import('./messages/messages.page').then((m) => m.MessagesPage) },
   { path: '**', redirectTo: 'tabs' },
 ];
