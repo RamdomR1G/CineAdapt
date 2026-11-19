@@ -1,0 +1,38 @@
+name: CI Frontend
+
+# Se ejecuta en cada push y en cada pull request hacia main
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  pruebas-y-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Pruebas unitarias y de integracion (con cobertura)
+        run: npm run test:ci
+
+      - name: Compilar la aplicacion (produccion)
+        run: npm run build
+
+      - name: Guardar reporte de cobertura
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cobertura-frontend
+          path: coverage/
+          if-no-files-found: ignore

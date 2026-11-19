@@ -1,0 +1,58 @@
+{
+  "repeticiones": [
+    {
+      "tCard": 384,
+      "tIdle": 1016,
+      "bytes": 1193,
+      "nodos": 110,
+      "tarjetas": 4,
+      "heap": 11384610
+    },
+    {
+      "tCard": 385,
+      "tIdle": 1143,
+      "bytes": 1193,
+      "nodos": 110,
+      "tarjetas": 4,
+      "heap": 11399382
+    },
+    {
+      "tCard": 390,
+      "tIdle": 998,
+      "bytes": 1193,
+      "nodos": 110,
+      "tarjetas": 4,
+      "heap": 10968842
+    },
+    {
+      "tCard": 385,
+      "tIdle": 904,
+      "bytes": 1193,
+      "nodos": 110,
+      "tarjetas": 4,
+      "heap": 11371662
+    },
+    {
+      "tCard": 397,
+      "tIdle": 1013,
+      "bytes": 1193,
+      "nodos": 110,
+      "tarjetas": 4,
+      "heap": 11383202
+    }
+  ],
+  "primera_tarjeta_ms": {
+    "min": 384,
+    "prom": 388,
+    "max": 397
+  },
+  "red_inactiva_ms": {
+    "min": 904,
+    "prom": 1015,
+    "max": 1143
+  },
+  "nodos_dom": 110,
+  "tarjetas": 4,
+  "bytes_catalogo": 1193,
+  "heap_mb": 10.9
+}

@@ -59,11 +59,22 @@ export class SupportPage implements OnInit {
   async refresh(ev: any) { await this.load(); ev.target.complete(); }
   open(id: number) { this.router.navigate(['/support', id]); }
 
+  private intento: { huella: string; clave: string } | null = null;
+  /** Practica 12: la misma clave de idempotencia se reutiliza mientras el contenido del formulario no cambie, de modo que
+   *  volver a pulsar Enviar tras perder la respuesta no crea un segundo reporte. */
+  private clave(): string {
+    const huella = [this.title(), this.desc(), this.priority(), this.file?.name ?? ''].join('\u0001');
+    if (!this.intento || this.intento.huella !== huella) {
+      const id = (globalThis.crypto as any)?.randomUUID?.() ?? (Date.now().toString(36) + Math.random().toString(36).slice(2, 12));
+      this.intento = { huella, clave: String(id).replace(/[^A-Za-z0-9_-]/g, '').slice(0, 64).padEnd(8, '0') };
+    }
+    return this.intento.clave;
+  }
   async create() {
     this.msg.set(''); this.busy.set(true);
     try {
-      const r = await this.api.createReport(this.title(), this.desc(), this.priority(), this.file);
-      this.ok.set(true); this.msg.set(`Reporte ${r.code} enviado.`);
+      const r = await this.api.createReport(this.title(), this.desc(), this.priority(), this.file, this.clave());
+      this.ok.set(true); this.msg.set(`Reporte ${r.code} enviado.`); this.intento = null;
       this.title.set(''); this.desc.set(''); this.file = null;
       await this.load();
     } catch (e: any) { this.ok.set(false); this.msg.set(e?.error?.message ?? 'No se pudo enviar el reporte.'); }

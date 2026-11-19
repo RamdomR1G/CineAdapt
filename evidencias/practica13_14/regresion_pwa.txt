@@ -1,0 +1,8 @@
+  ● RegisterPage.submit - defectos P11 corregidos en P13/14 (pruebas de regresion) › DEF-FE-02 corregido: contrasenas de 7 caracteres se rechazan en el cliente igual que en el backend
+  ● RegisterPage.submit - valores limite de la contrasena (Boundary Value Analysis) › longitud 6 -> acepta=false
+  ● RegisterPage.submit - valores limite de la contrasena (Boundary Value Analysis) › longitud 7 -> acepta=false
+  ● RegisterPage.submit usa el validador (defecto FE-01) › contrasena de 7 caracteres NO se envia al servidor
+  ● validarRegistro (AUT-01..03) › AUT-01b el limite exacto de 8 caracteres es valido
+  ● validarRegistro (AUT-01..03) › AUT-03 contrasena fuera de rango (7 caracteres) se rechaza igual que el backend
+Test Suites: 2 failed, 5 passed, 7 total
+Tests:       6 failed, 109 passed, 115 total

@@ -1,0 +1,74 @@
+{
+  "etiqueta": "antes",
+  "fecha": "2026-11-13T00:20:56.679Z",
+  "escenarios": [
+    {
+      "id": "RES-01",
+      "escenario": "Perdida de Internet durante una consulta (catalogo)",
+      "esperado": "Error controlado con opcion de reintentar",
+      "observado": "Mensaje de error a los 336 ms; boton Reintentar: si",
+      "ok": true,
+      "tiempo_ms": 336
+    },
+    {
+      "id": "RES-02",
+      "escenario": "Perdida de Internet durante una escritura (Mi lista)",
+      "esperado": "No confirmar falsamente y avisar al usuario",
+      "observado": "Boton=\"+ Mi lista\"; filas en BD=0; aviso visible=no; excepciones sin capturar=1",
+      "ok": false
+    },
+    {
+      "id": "RES-03",
+      "escenario": "Servidor sin respuesta (la solicitud nunca termina)",
+      "esperado": "Timeout controlado y mensaje de error",
+      "observado": "Sin timeout: tras 40 s la pantalla sigue cargando (spinner=3)",
+      "ok": false,
+      "tiempo_ms": 40000
+    },
+    {
+      "id": "RES-04",
+      "escenario": "Respuesta HTTP 500 del servidor",
+      "esperado": "Mostrar error y conservar estabilidad",
+      "observado": "Mensaje a los 285 ms; barra de navegacion operativa=true; excepciones sin capturar=0",
+      "ok": true,
+      "tiempo_ms": 285
+    },
+    {
+      "id": "RES-05a",
+      "escenario": "Respuesta HTTP 401 (sesion vencida)",
+      "esperado": "Cerrar sesion y llevar al inicio de sesion",
+      "observado": "Redirigido a /login",
+      "ok": true,
+      "tiempo_ms": 271
+    },
+    {
+      "id": "RES-05b",
+      "escenario": "Respuesta HTTP 403 (sin permiso) en una escritura",
+      "esperado": "No confirmar y mostrar el motivo",
+      "observado": "Boton=\"+ Mi lista\"; aviso visible=no; excepciones sin capturar=1",
+      "ok": false
+    },
+    {
+      "id": "RES-06",
+      "escenario": "Recuperacion de la conexion tras un fallo",
+      "esperado": "Restablecer la comunicacion al reintentar",
+      "observado": "Catalogo restablecido en 1509 ms tras pulsar Reintentar",
+      "ok": true,
+      "tiempo_ms": 1509
+    },
+    {
+      "id": "RES-07",
+      "escenario": "Reintento de una escritura tras perder la respuesta (crear reporte)",
+      "esperado": "Un solo registro (sin duplicados)",
+      "observado": "Reportes con el mismo titulo en BD=2; mensaje 1=\"No se pudo enviar el reporte.\"; mensaje 2=\"Reporte REP197905 enviado.\"",
+      "ok": false
+    },
+    {
+      "id": "RES-08",
+      "escenario": "Respuesta tardia con doble toque (3 s de retraso)",
+      "esperado": "Un solo registro, interfaz consistente y sin excepciones",
+      "observado": "Solicitudes POST enviadas=2; filas en BD=1; boton=\"✓ En mi lista\"; errores sin capturar en consola=1",
+      "ok": false
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+PASS tests-wb/resilience.spec.ts
+PASS tests-wb/register.spec.ts
+PASS tests-wb/theme.spec.ts
+PASS tests-wb/catalog.spec.ts
+PASS tests-wb/auth.spec.ts
+---------------------|---------|----------|---------|---------|-------------------
+File                 | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+---------------------|---------|----------|---------|---------|-------------------
+All files            |     100 |    97.33 |     100 |     100 |                   
+ auth                |     100 |      100 |     100 |     100 |                   
+  register.page.ts   |     100 |      100 |     100 |     100 |                   
+ catalog             |     100 |      100 |     100 |     100 |                   
+  catalog.store.ts   |     100 |      100 |     100 |     100 |                   
+ services            |     100 |    95.83 |     100 |     100 |                   
+  auth.service.ts    |     100 |       75 |     100 |     100 | 37-38             
+  resilience.http.ts |     100 |      100 |     100 |     100 |                   
+  theme.service.ts   |     100 |      100 |     100 |     100 |                   
+---------------------|---------|----------|---------|---------|-------------------
+
+Test Suites: 5 passed, 5 total
+Tests:       95 passed, 95 total
+Snapshots:   0 total
+Time:        3.243 s
+Ran all test suites.

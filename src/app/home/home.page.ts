@@ -1,6 +1,6 @@
 import { Component, OnInit, computed } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonSpinner, IonRefresher, IonRefresherContent, IonButton } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonSpinner, IonRefresher, IonRefresherContent, IonButton, IonInfiniteScroll, IonInfiniteScrollContent } from '@ionic/angular/standalone';
 import { CatalogStore } from '../catalog/catalog.store';
 import { MovieCardComponent } from '../catalog/movie-card.component';
 import { AuthService } from '../services/auth.service';
@@ -17,7 +17,7 @@ const MOMENT: Record<ThemeName, { title: string; genres: string[] }> = {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink, IonHeader, IonToolbar, IonTitle, IonContent, IonSpinner, IonRefresher, IonRefresherContent, IonButton, MovieCardComponent],
+  imports: [RouterLink, IonHeader, IonToolbar, IonTitle, IonContent, IonSpinner, IonRefresher, IonRefresherContent, IonButton, IonInfiniteScroll, IonInfiniteScrollContent, MovieCardComponent],
   template: `
   <ion-header><ion-toolbar><ion-title>CineAdapt</ion-title></ion-toolbar></ion-header>
   <ion-content>
@@ -41,6 +41,9 @@ const MOMENT: Record<ThemeName, { title: string; genres: string[] }> = {
       <h3 class="row-title">{{ g.genre }}</h3>
       <div class="row">@for (m of g.items; track m.id) { <div class="item"><app-movie-card [movie]="m" /></div> }</div>
     }
+    @if (store.movies().length) {
+      <ion-infinite-scroll threshold="300px" (ionInfinite)="more($event)" [disabled]="!store.hasMore"><ion-infinite-scroll-content loadingSpinner="dots"></ion-infinite-scroll-content></ion-infinite-scroll>
+    }
     @if (!store.loading() && !store.error() && !store.movies().length) { <p class="msg">Aun no hay contenido publicado.</p> }
   </ion-content>`,
   styleUrl: './home.page.scss',
@@ -56,5 +59,6 @@ export class HomePage implements OnInit {
   });
   constructor(public store: CatalogStore, private auth: AuthService, private theme: ThemeService) {}
   ngOnInit() { this.store.load(); }
+  async more(ev: any) { await this.store.loadMore(); ev.target.complete(); }
   async refresh(ev: any) { await this.store.load(); ev.target.complete(); }
 }

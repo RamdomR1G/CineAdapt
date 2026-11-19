@@ -1,0 +1,19 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "ES2022",
+    "types": [
+      "jest",
+      "node"
+    ],
+    "isolatedModules": true,
+    "allowJs": true,
+    "esModuleInterop": true
+  },
+  "include": [
+    "tests-ci/**/*.ts",
+    "tests-wb/**/*.ts",
+    "src/**/*.ts"
+  ]
+}

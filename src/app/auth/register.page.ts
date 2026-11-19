@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { IonContent, IonItem, IonInput, IonButton, IonList, IonText, IonSpinner } from '@ionic/angular/standalone';
 import { AuthService } from '../services/auth.service';
+import { validarRegistro, mensajeErrorRegistro } from './validators';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +17,7 @@ import { AuthService } from '../services/auth.service';
       <ion-list [inset]="true">
         <ion-item><ion-input label="Nombre" labelPlacement="stacked" [(ngModel)]="name"></ion-input></ion-item>
         <ion-item><ion-input type="email" label="Correo" labelPlacement="stacked" [(ngModel)]="email"></ion-input></ion-item>
-        <ion-item><ion-input type="password" label="Contrasena (min. 6)" labelPlacement="stacked" [(ngModel)]="password"></ion-input></ion-item>
+        <ion-item><ion-input type="password" label="Contrasena (min. 8)" labelPlacement="stacked" [(ngModel)]="password"></ion-input></ion-item>
       </ion-list>
       @if (error()) { <ion-text color="danger"><p class="err">{{ error() }}</p></ion-text> }
       <div class="btn"><ion-button expand="block" (click)="submit()" [disabled]="busy()">
@@ -32,10 +33,11 @@ export class RegisterPage {
   busy = signal(false); error = signal('');
   constructor(private auth: AuthService, private router: Router) {}
   async submit() {
-    if (!this.name || !this.email || this.password.length < 6) { this.error.set('Completa todos los campos (contrasena de al menos 6 caracteres).'); return; }
+    const invalido = validarRegistro(this.name, this.email, this.password);
+    if (invalido) { this.error.set(invalido); return; }
     this.busy.set(true); this.error.set('');
     try { await this.auth.register(this.name.trim(), this.email.trim(), this.password); this.router.navigateByUrl('/tabs/home'); }
-    catch (e: any) { this.error.set(e?.error?.error ?? e?.error?.message ?? 'No se pudo crear la cuenta.'); }
+    catch (e: any) { this.error.set(mensajeErrorRegistro(e)); }
     finally { this.busy.set(false); }
   }
 }

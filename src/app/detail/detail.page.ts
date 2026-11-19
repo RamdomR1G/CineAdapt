@@ -28,6 +28,7 @@ import { Movie } from '../models/movie';
           <ion-button fill="outline" (click)="toggle(m)">{{ store.inList(m.id) ? '✓ En mi lista' : '+ Mi lista' }}</ion-button>
           <ion-button id="rec-open" fill="clear" (click)="recOpen.set(!recOpen())">Recomendar</ion-button>
         </div>
+        @if (listMsg()) { <p id="list-msg" class="list-msg">{{ listMsg() }}</p> }
         @if (recOpen()) {
           <ion-list [inset]="true">
             <ion-item><ion-input id="rec-email" label="Correo de la persona" labelPlacement="stacked" type="email" [value]="recEmail()" (ionInput)="recEmail.set($any($event.target).value)"></ion-input></ion-item>
@@ -50,7 +51,7 @@ import { Movie } from '../models/movie';
     } @else if (loading()) { <div class="center"><ion-spinner></ion-spinner></div> }
     @else { <p class="msg">No se encontro el titulo.</p> }
   </ion-content>`,
-  styles: [`.player,.poster{width:100%;aspect-ratio:16/9;object-fit:cover;background:#000;border:0}.body{padding:16px}h2{margin:0}.meta{opacity:.65;font-size:.85rem}.btns{display:flex;gap:8px;margin:8px 0}.center{display:flex;justify-content:center;padding:32px}.msg{text-align:center;padding:24px;opacity:.7}`],
+  styles: [`.player,.poster{width:100%;aspect-ratio:16/9;object-fit:cover;background:#000;border:0}.body{padding:16px}h2{margin:0}.meta{opacity:.65;font-size:.85rem}.btns{display:flex;gap:8px;margin:8px 0}.center{display:flex;justify-content:center;padding:32px}.msg{text-align:center;padding:24px;opacity:.7}.list-msg{color:var(--ion-color-danger);font-size:.85rem;margin:4px 0}`],
 })
 export class DetailPage implements OnInit {
   movie = signal<Movie | null>(null);
@@ -82,5 +83,10 @@ export class DetailPage implements OnInit {
       this.recMsg.set(`Recomendacion enviada a ${u.name}.`); this.recBody.set('');
     } catch (e: any) { this.recMsg.set(e?.error?.message ?? 'No se pudo enviar.'); }
   }
-  toggle(m: Movie) { this.store.toggleList(m.id); }
+  listMsg = signal('');
+  async toggle(m: Movie) {
+    this.listMsg.set('');
+    try { if (!(await this.store.toggleList(m.id))) this.listMsg.set('No se pudo actualizar tu lista. Revisa tu conexion e intenta de nuevo.'); }
+    catch (e: any) { this.listMsg.set(e?.error?.message ?? 'No se pudo actualizar tu lista.'); }
+  }
 }

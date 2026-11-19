@@ -1,0 +1,19 @@
+digraph G { rankdir=TB; node [fontname="Helvetica", fontsize=11]; edge [fontname="Helvetica", fontsize=10];
+ n1 [label="1\nInicio submit()", shape=ellipse];
+ n2 [label="2\n!name  (C1)", shape=diamond];
+ n3 [label="3\n!email  (C2)", shape=diamond];
+ n4 [label="4\npassword.length < 6  (C3)", shape=diamond];
+ n5 [label="5\nerror.set(mensaje)\nreturn  [L35]", shape=box];
+ n6 [label="6\nbusy=true; error=''  [L36]", shape=box];
+ n7 [label="7\nawait auth.register(...)  [L37]\n(try)", shape=box];
+ n8 [label="8\nnavigateByUrl('/tabs/home')  [L37]", shape=box];
+ n9 [label="9\ne?.error?.error  (C5)  [L38]\n(catch)", shape=diamond];
+ n10 [label="10\ne?.error?.message  (C6)", shape=diamond];
+ n11 [label="11\nerror = e.error.error", shape=box];
+ n12 [label="12\nerror = e.error.message", shape=box];
+ n13 [label="13\nerror = 'No se pudo crear la cuenta.'", shape=box];
+ n14 [label="14\nfinally: busy=false  [L39]", shape=box];
+ n15 [label="15\nFin", shape=ellipse];
+ n1->n2; n2->n5 [label="V"]; n2->n3 [label="F"]; n3->n5 [label="V"]; n3->n4 [label="F"]; n4->n5 [label="V"]; n4->n6 [label="F"];
+ n5->n15; n6->n7; n7->n8 [label="exito"]; n7->n9 [label="excepcion"]; n8->n14;
+ n9->n11 [label="V"]; n9->n10 [label="F"]; n10->n12 [label="V"]; n10->n13 [label="F"]; n11->n14; n12->n14; n13->n14; n14->n15; }
