@@ -1,0 +1,22 @@
+PASS tests-wb/theme.spec.ts
+PASS tests-wb/register.spec.ts
+PASS tests-wb/catalog.spec.ts
+PASS tests-wb/auth.spec.ts
+-------------------|---------|----------|---------|---------|-------------------
+File               | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+-------------------|---------|----------|---------|---------|-------------------
+All files          |     100 |    95.65 |     100 |     100 |                   
+ auth              |     100 |      100 |     100 |     100 |                   
+  register.page.ts |     100 |      100 |     100 |     100 |                   
+ catalog           |     100 |      100 |     100 |     100 |                   
+  catalog.store.ts |     100 |      100 |     100 |     100 |                   
+ services          |     100 |    93.93 |     100 |     100 |                   
+  auth.service.ts  |     100 |       75 |     100 |     100 | 37-38             
+  theme.service.ts |     100 |      100 |     100 |     100 |                   
+-------------------|---------|----------|---------|---------|-------------------
+
+Test Suites: 4 passed, 4 total
+Tests:       55 passed, 55 total
+Snapshots:   0 total
+Time:        2.213 s
+Ran all test suites.

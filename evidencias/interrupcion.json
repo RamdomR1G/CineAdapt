@@ -1,0 +1,62 @@
+[
+  {
+    "id": "NET-05a",
+    "descripcion": "Con conexion: agregar a Mi lista",
+    "resultado": "UI=\"✓ En mi lista\", filas en BD=1",
+    "ok": true
+  },
+  {
+    "id": "NET-05b",
+    "descripcion": "Sin conexion: no se muestra un exito falso",
+    "resultado": "UI=\"+ Mi lista\", filas en BD=0",
+    "ok": true
+  },
+  {
+    "id": "NET-05c",
+    "descripcion": "Sin conexion: la app informa al usuario del error",
+    "resultado": "Sin mensaje visible; excepciones sin capturar en consola: 2 (ERROR Ns)",
+    "ok": false
+  },
+  {
+    "id": "NET-06a",
+    "descripcion": "Recuperacion: al volver la red la operacion se completa",
+    "resultado": "UI=\"✓ En mi lista\", filas en BD=1",
+    "ok": true
+  },
+  {
+    "id": "NET-06b",
+    "descripcion": "Respuesta perdida: servidor guardo el registro pero la UI lo ignora (estado inconsistente)",
+    "resultado": "UI=\"+ Mi lista\", filas en BD=1",
+    "ok": false
+  },
+  {
+    "id": "NET-06c",
+    "descripcion": "Reintento tras respuesta perdida: el servidor impide el duplicado (UNIQUE) pero la UI sigue sin reflejar el estado real",
+    "resultado": "UI=\"+ Mi lista\", filas en BD=1",
+    "ok": false
+  },
+  {
+    "id": "NET-06d",
+    "descripcion": "Tras recargar la pantalla el estado vuelve a ser consistente",
+    "resultado": "UI=\"✓ En mi lista\", filas en BD=1",
+    "ok": true
+  },
+  {
+    "id": "NET-05d",
+    "descripcion": "Inicio de sesion sin conexion muestra un mensaje claro",
+    "resultado": "Mensaje: \"No se pudo conectar al servidor.\"",
+    "ok": true
+  },
+  {
+    "id": "NET-05e",
+    "descripcion": "Catalogo sin conexion: mensaje de error y boton Reintentar",
+    "resultado": "mensaje=1, boton Reintentar=1",
+    "ok": true
+  },
+  {
+    "id": "NET-06e",
+    "descripcion": "Al volver la conexion, Reintentar recupera el catalogo",
+    "resultado": "tarjetas visibles=5012",
+    "ok": true
+  }
+]

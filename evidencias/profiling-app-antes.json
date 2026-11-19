@@ -1,0 +1,72 @@
+{
+  "etiqueta": "antes",
+  "fecha": "2026-11-13T00:17:53.092Z",
+  "emulacion": "Chromium, 390x844, CPU 4x mas lenta, red local",
+  "operaciones": {
+    "consulta_inicio": {
+      "repeticiones": 5,
+      "primera_tarjeta_ms": [
+        8818,
+        6817,
+        8960,
+        8566,
+        5780
+      ],
+      "mediana_ms": 8566
+    },
+    "escritura_mi_lista": {
+      "operaciones": 10,
+      "mediana_ms": 111,
+      "max_ms": 872
+    },
+    "navegacion_ms": {
+      "search": 5626,
+      "mylist": 936,
+      "profile": 742,
+      "home": 5604
+    },
+    "busqueda": [
+      {
+        "consulta": "Carga 123",
+        "ms": 713,
+        "tarjetas": 11,
+        "cpu_s": 2
+      },
+      {
+        "consulta": "Drama",
+        "ms": 2887,
+        "tarjetas": 1601,
+        "cpu_s": 4.1
+      },
+      {
+        "consulta": "Carga 4999",
+        "ms": 2568,
+        "tarjetas": 0,
+        "cpu_s": 3.8
+      },
+      {
+        "consulta": "xyz",
+        "ms": 2648,
+        "tarjetas": 0,
+        "cpu_s": 3.7
+      }
+    ]
+  },
+  "cpu": {
+    "tiempo_real_s": 76.9,
+    "cpu_promedio_pct": 31.9,
+    "script_s": 4,
+    "layout_s": 5.6
+  },
+  "memoria_mb": {
+    "inicial": 27.8,
+    "maxima": 127.5,
+    "final": 137.1
+  },
+  "nodos_dom_final": 154540,
+  "tareas_largas": {
+    "cantidad": 29,
+    "total_ms": 20968,
+    "maxima_ms": 3202
+  }
+}
